@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporativo Soluciones Vega</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0fff4;
+            color: #333;
+            transition: background 0.5s, color 0.5s;
+        }
+        header {
+            background: url('https://i.postimg.cc/3xXMf74b/Captura-de-pantalla-2024-12-08-162032.png') no-repeat center center;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            max-width: 1600px;
+            padding: 50px 0;
+            border-bottom: 4px solid #28a745;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin: 10px 0 0;
+            font-size: 1.2rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        input[type="text"] {
+            width: 60%;
+            padding: 12px;
+            margin-right: 10px;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button[type="submit"] {
+            background: linear-gradient(45deg, #28a745, #218838);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button[type="submit"]:hover {
+            background: #218838;
+        }
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .feature {
+            flex: 1 1 calc(30% - 20px);
+            background: #fff;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .feature:hover {
+            transform: scale(1.05);
+        }
+        .feature img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .feature h3 {
+            margin-top: 10px;
+            color: #218838;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: #fff;
+            margin-top: 30px;
+        }
+        footer .contact {
+            margin-top: 20px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .modal img {
+            max-width: 80%;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .modal p {
+            color: white;
+            text-align: center;
+        }
+        .modal button {
+            padding: 10px 15px;
+            background-color: #FF6347;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .modal button:hover {
+            background-color: #FF4500;
+        }
+        .form-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h3 {
+            text-align: center;
+            color: #218838;
+            margin-bottom: 10px;
+        }
+        .form-container p {
+            text-align: center;
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .form-actions {
+            text-align: center;
+        }
+        .form-actions button {
+            width: 100%;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .form-actions button:hover {
+            background: #218838;
+        }
+        /* Color scheme for Black and Red */
+        .black-red-colors {
+            background: #000;
+            color: #fff;
+        }
+        .black-red-colors header {
+            background: #B22222;
+            border-bottom: 4px solid #ff0000;
+        }
+        .black-red-colors .form-container {
+            border: 2px solid #ff0000;
+        }
+        .black-red-colors .feature {
+            border-color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Corporativo Soluciones Vega</h1>
+        <p>Experimentamos con lo verde para cuidar tu hogar</p>
+    </header>
+    <div class="container">
+        <form onsubmit="return buscar();">
+            <input type="text" id="search" placeholder="Busca algo (por ejemplo, Lavado de techos)" required>
+            <button type="submit">🌿 Buscar Servicios</button>
+        </form>
+        <div class="features">
+            <div class="feature" onclick="abrirModal('Lavado Exterior', 'Deja tu casa como nueva.', '$50 por sesión', 'https://i.postimg.cc/tgnVZMLt/descarga.jpg')">
+                <img id="img-lavado" src="https://mas-social.es/wp-content/uploads/2020/09/limpieza-fachadas-agua-presion-300x200.jpg" alt="Lavado Exterior">
+                <h3>Lavado Exterior</h3>
+            </div>
+            <div class="feature" onclick="abrirModal('Limpieza Industrial', 'Rendimiento y eficiencia asegurada.', '$200 por jornada', 'https://i.postimg.cc/7ZgFHHLg/Inductrial.jpg')">
+                <img id="img-industrial" src="https://i.postimg.cc/8PqGkXmV/Inductrial.jpg" alt="Limpieza Industrial">
+                <h3>Limpieza Industrial</h3>
+            </div>
+            <div class="feature" onclick="abrirModal('Limpieza Hospitalaria', 'Salud y limpieza al más alto nivel.', '$150 por sesión', 'https://i.postimg.cc/K8SXhkmG/hospitalarai.jpg')">
+                <img id="img-hospitalaria" src="https://i.postimg.cc/zXL5rYWj/hospitalarai.jpg" alt="Limpieza Hospitalaria">
+                <h3>Limpieza Hospitalaria</h3>
+            </div>
+            <div class="feature" onclick="abrirModal('Desinfección de Áreas Comunes', 'Seguridad y desinfección para tu comunidad.', '$100 por sesión', 'https://i.postimg.cc/gk697qFt/Desinfeccion.jpg')">
+                <img id="img-comunes" src="https://i.postimg.cc/Y0PHWdcY/Desinfeccion.jpg" alt="Desinfección de Áreas Comunes">
+                <h3>Desinfección de Áreas Comunes</h3>
+            </div>
+            <div class="feature" onclick="abrirModal('Limpieza de Oficinas', 'Higiene y orden en tu lugar de trabajo.', '$80 por jornada', 'https://i.postimg.cc/1RdhM7TN/OFICINAS.jpg')">
+                <img id="img-oficinas" src="https://i.postimg.cc/bJ38zz36/OFICINAS.jpg" alt="Limpieza de Oficinas">
+                <h3>Limpieza de Oficinas</h3>
+            </div>
+            <div class="feature" onclick="abrirModal('Limpieza Post Obra', 'Deja tu espacio listo después de la construcción.', '$300 por jornada', 'https://i.postimg.cc/Vvpx65MF/post-obra.jpg')">
+                <img id="img-postobra" src="https://i.postimg.cc/d33F3zfJ/post-obra.jpg" alt="Limpieza Post Obra">
+                <h3>Limpieza Post Obra</h3>
+            </div>
+            <div class="feature" onclick="abrirModal('Supervisor de Seguridad', 'Mantén la seguridad de tu empresa bajo control.', 'Precio bajo consulta', 'https://i.postimg.cc/SRn0kcXs/Supervisor.jpg')">
+                <img id="img-supervisor" src="https://i.postimg.cc/J7Ymvzy0/Supervisor.jpg" alt="Supervisor de Seguridad">
+                <h3>Supervisor de Seguridad</h3>
+            </div>
+        </div>
+    </div>
+    <div class="form-container">
+        <h3>Únete a Nuestro Equipo</h3>
+        <p>En Corporativo Soluciones Vega, buscamos personas apasionadas por la limpieza y la seguridad. Completa tu solicitud de empleo y encuentra tu lugar con nosotros.</p>
+        <form id="employmentForm" onsubmit="return procesarSolicitud();">
+            <div class="form-group">
+                <label for="name"><strong>Nombre Completo:</strong></label>
+                <input type="text" id="name" placeholder="Escribe tu nombre completo" required>
+            </div>
+            <div class="form-group">
+                <label for="age"><strong>Edad:</strong></label>
+                <input type="number" id="age" placeholder="Introduce tu edad" required>
+            </div>
+            <div class="form-group">
+                <label for="gender"><strong>Sexo:</strong></label>
+                <input type="text" id="gender" placeholder="Escribe tu sexo (opcional)">
+            </div>
+            <div class="form-group">
+                <label for="degree"><strong>Carrera Universitaria:</strong></label>
+                <input type="text" id="degree" placeholder="Si aplica, escribe tu carrera (opcional)">
+            </div>
+            <div class="form-group">
+                <label for="position"><strong>Puesto Deseado:</strong></label>
+                <select id="position">
+                    <optgroup label="Limpieza">
+                        <option value="limpieza-exterior">Especialista en Limpieza Exterior</option>
+                        <option value="limpieza-industrial">Limpieza Industrial</option>
+                        <option value="limpieza-hospitalaria">Limpieza Hospitalaria</option>
+                        <option value="desinfeccion-areas">Desinfección de Áreas Comunes</option>
+                        <option value="limpieza-oficinas">Limpieza de Oficinas</option>
+                        <option value="limpieza-post-obra">Limpieza Post Obra</option>
+                    </optgroup>
+                    <optgroup label="Seguridad">
+                        <option value="supervisor-seguridad">Supervisor de Seguridad</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="submit">Enviar Solicitud</button>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <p>&copy; 2024 Corporativo Soluciones Vega. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+    function buscar() {
+        var searchInput = document.getElementById("search").value;
+
+        if (searchInput === "CSV Trabajadores") {
+            // Redirect to YouTube
+            window.location.href = "Pag trabaadores.html";
+        }else{
+            // Display message
+            alert("Por favor dirigirse a la pagina del corporativo ");
+        }
+
+        return false; // Prevent actual form submission
+    }
+    let isRedBlackMode = false; // Flag to track the current mode
+
+    function cambiarColores() {
+        var body = document.body;
+        var header = document.querySelector("header");
+        var formContainer = document.querySelector(".form-container");
+        var footer = document.querySelector("footer");
+        var searchInput = document.getElementById("search");
+        var submitButton = document.querySelector("button[type='submit']");
+
+        // Cambiar colores a negro y rojo
+        body.classList.add("black-red-colors");
+        header.classList.add("black-red-colors");
+        formContainer.classList.add("black-red-colors");
+        footer.classList.add("black-red-colors");
+
+        // Set the mode flag to true
+        isRedBlackMode = true;
+
+        // Cambiar las imágenes de las opciones de trabajo
+        document.getElementById('img-lavado').src = 'https://i.postimg.cc/7LYRMgxL/Persona-1-Kyle.jpg';
+        document.getElementById('img-industrial').src = 'https://i.postimg.cc/RZT8HPx8/Persona-2-Britny.jpg';
+        document.getElementById('img-hospitalaria').src = 'https://i.postimg.cc/kgCzG0zK/Persona-3-Jorge.jpg';
+        document.getElementById('img-comunes').src = 'https://i.postimg.cc/J4ZS1r6R/Persona-4-Mauricio.jpg';
+        document.getElementById('img-oficinas').src = 'https://i.postimg.cc/9X4vntyR/Persona-5-Angelica.jpg';
+        document.getElementById('img-postobra').src = 'https://i.postimg.cc/05LLRMCt/Persona-6-Tony.jpg';
+        document.getElementById('img-supervisor').src = 'https://i.postimg.cc/HjD0ZCX2/Persona-7-Dan.jpg';
+
+        // Cambiar los nombres de los trabajos
+        var jobTitles = {
+            'Lavado Exterior': 'Jefe de departamento',
+            'Limpieza Industrial': 'Asesora financiera',
+            'Limpieza Hospitalaria': 'Diseñador grafico',
+            'Desinfección de Áreas Comunes': 'Ciberseguridad',
+            'Limpieza de Oficinas': 'Contadora',
+            'Limpieza Post Obra': 'Limpieza',
+            'Supervisor de Seguridad': 'Seguridad'
+        };
+
+        // Update the job titles in the DOM
+        document.querySelectorAll('.feature h3').forEach(feature => {
+            var currentTitle = feature.innerText;
+            if (jobTitles[currentTitle]) {
+                feature.innerText = jobTitles[currentTitle];
+            }
+        });
+
+        // Change the placeholder text of the search input
+        searchInput.placeholder = "CSV Trabajadores";
+
+        // Change the button's background color to red and text to "Localizar"
+        submitButton.style.background = "#B22222";
+        submitButton.textContent = "Dirigirse a pagina de trabajadores";
+
+        // Disable click events on features
+        disableFeatureClicks();
+    }
+
+    function disableFeatureClicks() {
+        document.querySelectorAll('.feature').forEach(feature => {
+            feature.style.pointerEvents = 'none'; // Disable clicks
+        });
+    }
+
+    function enableFeatureClicks() {
+        document.querySelectorAll('.feature').forEach(feature => {
+            feature.style.pointerEvents = 'auto'; // Enable clicks
+        });
+    }
+
+    function abrirModal(titulo, descripcion, precio, imagen) {
+        if (isRedBlackMode) {
+            // If in red-black mode, do not open modal
+            return;
+        }
+        var modal = document.createElement("div");
+        modal.className = "modal";
+        modal.innerHTML = `
+            <img src="${imagen}" alt="${titulo}" onclick="abrirImagenGrande('${imagen}', '${titulo}')">
+            <h3>${titulo}</h3>
+            <p>${descripcion}</p>
+            <p><strong>Precio:</strong> ${precio}</p>
+            <button id="closeModal">Cerrar</button>
+        `;
+        document.body.appendChild(modal);
+        modal.style.display = 'flex';
+
+        // Add event listener to the close button
+        document .getElementById("closeModal").onclick = function() {
+            document.body.removeChild(modal);
+        };
+    }
+
+    function abrirImagenGrande(imagen, titulo) {
+        var modal = document.createElement("div");
+        modal.className = "modal";
+        modal.innerHTML = `
+            <img src="${imagen}" alt="${titulo}" style="max-width: 80%;">
+            <button id="closeImageModal">Cerrar</button>
+        `;
+        document.body.appendChild(modal);
+        modal.style.display = 'flex';
+
+        // Add event listener to the close button
+        document.getElementById("closeImageModal").onclick = function() {
+            document.body.removeChild(modal);
+        };
+    }
+
+    function procesarSolicitud() {
+        // Get the selected position
+        var selectedPosition = document.getElementById("position").value;
+
+        if (selectedPosition === "supervisor-seguridad") {
+            // Change colors to red and black
+            cambiarColores();
+            alert("Usted fue contratad@, su usuario y contraseña seran brindados a la brevedad.")
+            alert("Puede acceder a la pagina de los trabajadores en el buscador directo")
+        } else {
+            // Show alert message for other positions
+            cambiarColores();
+            alert("Usted fue contratad@, su usuario y contraseña seran brindados a la brevedad.")
+            alert("Puede acceder a la pagina de los trabajadores en el buscador directo")
+        }
+        
+
+        return false; // Prevent actual form submission
+    }
+    </script>
+</body>
+</html>
